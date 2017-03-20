@@ -4,12 +4,15 @@ class ApartmentsController < ApplicationController
   # GET /apartments
   # GET /apartments.json
   def index
+
     @apartments = Apartment.all
+
   end
 
   # GET /apartments/1
   # GET /apartments/1.json
   def show
+
   end
 
   # GET /apartments/new
@@ -61,6 +64,16 @@ class ApartmentsController < ApplicationController
     end
   end
 
+  def map_location
+    @apartment = Apartment.find(params[:apartment_id])
+    @hash = Gmaps4rails.build_markers(@apartment) do |apartment, marker|
+      marker.lat(apartment.latitude)
+      marker.lng(apartment.longitude)
+      marker.infowindow("<em>" + apartment.address + "</em>")
+    end
+    render json: @hash.to_json
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_apartment
