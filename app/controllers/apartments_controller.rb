@@ -6,8 +6,12 @@ class ApartmentsController < ApplicationController
   def index
 
     @apartments = Apartment.all
-
+    @results = 
+    if params[:search].present?
+      @results = Apartment.basic_search(params[:search])
+    end
   end
+
 
   # GET /apartments/1
   # GET /apartments/1.json
@@ -73,7 +77,7 @@ class ApartmentsController < ApplicationController
     end
     render json: @hash.to_json
   end
-  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_apartment
@@ -82,6 +86,6 @@ class ApartmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def apartment_params
-      params.require(:apartment).permit(:latitude, :longitude, :address, :apt, :city, :state, :zip, :country, :name, :phone, :hrs_contact)
+      params.require(:apartment).permit(:latitude, :longitude, :address, :apt, :city, :state, :zip, :country, :name, :phone, :hrs_contact, :image)
     end
 end

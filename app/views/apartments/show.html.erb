@@ -1,4 +1,3 @@
-<div id="apartment_map" data-apartment-id="<%=@apartment.id%>">Google Map will appear here...</div>
 
 <p id="notice"><%= notice %></p>
 
@@ -56,6 +55,12 @@
   <strong>Hrs contact:</strong>
   <%= @apartment.hrs_contact %>
 </p>
+<br>
+<div id="apartment_map" data-apartment-id="<%=@apartment.id%>">Google Map will appear here...</div>
+<br>
+<%= link_to image_tag(@apartment.image.url(:large)), @apartment.image.url %>
 
+<br>
+<br>
 <%= link_to 'Edit', edit_apartment_path(@apartment) %> |
 <%= link_to 'Back', apartments_path %>
