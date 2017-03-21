@@ -41,7 +41,22 @@
     <% end %>
   </tbody>
 </table>
-
 <br>
 
 <%= link_to 'New Apartment', new_apartment_path %>
+
+<br>
+<p>Search Apartments:</p>
+<form action="/apartments" method="get">
+<input type="text" name="search" >
+<input type="submit" value="submit">
+</form>
+<br>
+<% if !@results.nil? %>
+  <% @results.each do |apartment| %>
+    <%= apartment.address %>
+    <%= apartment.city %>
+    <%= apartment.state %>
+    <%= apartment.zip %>
+  <% end %>
+<% end %>
