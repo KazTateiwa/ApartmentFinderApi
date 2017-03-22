@@ -24,6 +24,8 @@ gem 'underscore-rails'
 gem 'geocoder'
 gem 'gmaps4rails'
 gem 'devise'
+gem 'omniauth-twitter'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks

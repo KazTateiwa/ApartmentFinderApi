@@ -13,10 +13,12 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.omniauth :twitter, "hUpajQ37oMzcjfQtOLrzDQ8o9", "oCGSjkhonpHnbouWRYcDYQHKmDEoX7OO5q1o0ITofoMQoDrNla"
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
-
+  config.omniauth :twitter, "hUpajQ37oMzcjfQtOLrzDQ8o9", "oCGSjkhonpHnbouWRYcDYQHKmDEoX7OO5q1o0ITofoMQoDrNla",
+                  callback_url: "http://127.0.0.1:3000/auth/twitter/callback"
   # Configure the parent class responsible to send e-mails.
   # config.parent_mailer = 'ActionMailer::Base'
 
