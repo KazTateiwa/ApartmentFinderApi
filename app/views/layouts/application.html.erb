@@ -13,6 +13,11 @@
   <body>
     <%= yield %><br>
     <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-
+    <p>
+  <%= if !current_user.nil?
+        current_user.email + ' (' + current_user.roles.pluck(:name).join(",") + ')'
+      end
+  %>
+    </p>
   </body>
 </html>

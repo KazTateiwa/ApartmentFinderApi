@@ -1,11 +1,13 @@
 class ApartmentsController < ApplicationController
   before_action :set_apartment, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:index]
+  load_and_authorize_resource
   # GET /apartments
   # GET /apartments.json
   def index
 
     @apartments = Apartment.all
+    @ability = Ability.new(current_user)
 
   end
 
@@ -82,6 +84,6 @@ class ApartmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def apartment_params
-      params.require(:apartment).permit(:latitude, :longitude, :address, :apt, :city, :state, :zip, :country, :name, :phone, :hrs_contact)
+      params.require(:apartment).permit(:latitude, :longitude, :address, :apt, :city, :state, :zip, :country, :name, :phone, :hrs_contact, :user_id)
     end
 end

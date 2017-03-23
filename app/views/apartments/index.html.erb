@@ -22,6 +22,7 @@
 
   <tbody>
     <% @apartments.each do |apartment| %>
+    <% if @ability.can? :read, apartment %>
       <tr>
         <td><%= apartment.latitude %></td>
         <td><%= apartment.longitude %></td>
@@ -35,9 +36,12 @@
         <td><%= apartment.phone %></td>
         <td><%= apartment.hrs_contact %></td>
         <td><%= link_to 'Show', apartment %></td>
-        <td><%= link_to 'Edit', edit_apartment_path(apartment) %></td>
-        <td><%= link_to 'Destroy', apartment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% if @ability.can? :manage, apartment && user_signed_in? %>
+          <td><%= link_to 'Edit', edit_apartment_path(apartment) %></td>
+          <td><%= link_to 'Destroy', apartment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
+        <% end %>
+      <% end %>
     <% end %>
   </tbody>
 </table>

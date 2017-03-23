@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :omniauthable, :omniauth_providers => [:twitter]
@@ -6,6 +7,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :apartments #add this line
+  after_create :assign_role
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.uid + "@twitter.com"
@@ -18,4 +20,8 @@ class User < ApplicationRecord
       # user.skip_confirmation!
     end
   end
+
+    def assign_role
+      add_role(:user)
+    end
 end

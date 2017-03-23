@@ -1,5 +1,7 @@
 class Apartment < ApplicationRecord
   geocoded_by :address
-  after_validation :geocode
   belongs_to :user
+  validates :user, presence: true
+  after_validation :geocode
+  resourcify
 end
